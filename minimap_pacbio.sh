@@ -13,12 +13,11 @@
 #SBATCH --mail-user=andrew.sherrard@bcchr.ca
 
 module load minimap2/2.24 samtools/1.15.1
-shopt -s nullglob
 
 sample=HG00$SLURM_ARRAY_TASK_ID
 
 source_dir=/scratch/asherrar/thesis_files/hg002_trio/pacbio/$sample
-filetype=".fastq"
+filetype=".fasta"
 filetype_length=$(expr '-1' '*' length $filetype)
 
 cd $source_dir
@@ -26,11 +25,13 @@ cd $source_dir
 for file in $(ls *$filetype)
 do
 	file_name=${file::$filetype_length}
+	echo "Processing sample file $file_name"
 
 	for ref in /scratch/asherrar/thesis_files/references/*.fasta
 	do
 		destination=/scratch/asherrar/thesis_files/bam/pacbio
 		output_name=$sample-pacbio-$file_name-sorted.bam
+		echo " - Using reference $ref"
 
 		# align with minimap2
 		minimap2 -ax map-pb $ref $source_dir/$file -t 32 -Y -L --MD | samtools view -bhS - | samtools sort -m80G - -o $destination/$output_name
