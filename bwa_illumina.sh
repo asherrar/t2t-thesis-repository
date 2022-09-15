@@ -23,7 +23,7 @@ filetype_length=$(expr '-1' '*' length $filetype)
 for file in $source_dir/*$filetype
 do
 	file_base=$(basename $file)
-	file_name=${$file_base::$filetype_length}
+	file_name=${file_base::$filetype_length}
 
 	gunzip $file
 done
