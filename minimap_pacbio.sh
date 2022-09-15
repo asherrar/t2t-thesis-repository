@@ -13,19 +13,19 @@
 #SBATCH --mail-user=andrew.sherrard@bcchr.ca
 
 module load minimap2/2.24 samtools/1.15.1
+shopt -s nullglob
 
 sample=HG00$SLURM_ARRAY_TASK_ID
 
 source_dir=/scratch/asherrar/thesis_files/hg002_trio/pacbio/$sample
-filetype=".fastq.gz"
+filetype=".fastq"
 filetype_length=$(expr '-1' '*' length $filetype)
 
-for file in $source_dir/*$filetype
-do
-	file_base=$(basename $file)
-	file_name=${file_base::$filetype_length}
+cd $source_dir
 
-	gunzip $file
+for file in $(ls *$filetype)
+do
+	file_name=${file::$filetype_length}
 
 	for ref in /scratch/asherrar/thesis_files/references/*.fasta
 	do
@@ -33,7 +33,7 @@ do
 		output_name=$sample-pacbio-$file_name-sorted.bam
 
 		# align with minimap2
-		minimap2 -ax map-pb $ref $source_dir/$file_name.fastq -t 32 -Y -L --MD | samtools view -bhS - | samtools sort -m80G - -o $destination/$output_name
+		minimap2 -ax map-pb $ref $source_dir/$file -t 32 -Y -L --MD | samtools view -bhS - | samtools sort -m80G - -o $destination/$output_name
 		samtools index $destination/$output_name
 	done 
 done
