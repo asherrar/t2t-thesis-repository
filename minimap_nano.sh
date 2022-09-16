@@ -30,7 +30,11 @@ do
 	for ref in /scratch/asherrar/thesis_files/references/*.fasta
 	do
 		destination=/scratch/asherrar/thesis_files/bam/nano_ultra
-		output_name=$sample-nano_ultra-$file_name-sorted.bam
+		ref_file=$(basename $ref)
+		ref_name=${ref_file::-6}
+		
+		# sample-readlength-reference-file
+		output_name=$sample-nano_ultra-$ref_name-$file_name-sorted.bam
 		echo " - Using reference $ref"
 	
 		# align with minimap2
