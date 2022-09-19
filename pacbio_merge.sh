@@ -12,7 +12,7 @@
 #SBATCH --mail-type=BEGIN,END,FAIL
 #SBATCH --mail-user=andrew.sherrard@bcchr.ca
 
-samtools/1.15.1
+module load samtools/1.15.1
 
 sample=HG00$SLURM_ARRAY_TASK_ID
 cd /scratch/asherrar/thesis_files/bam
@@ -20,6 +20,7 @@ cd /scratch/asherrar/thesis_files/bam
 for list in $sample*
 do
 	cd pacbio
-	samtools merge -b /scratch/asherrar/thesis_files/bam/$list | samtools sort -m32G - -o /scratch/asherrar/thesis_files/bam/pacbio/$list-merged.bam
+	samtools merge -b /scratch/asherrar/thesis_files/bam/$list -o - | samtools sort -m32G - -o /scratch/asherrar/thesis_files/bam/pacbio/$list-merged.bam
 	samtools index /scratch/asherrar/thesis_files/bam/pacbio/$list-merged.bam
+	cd ..
 done
