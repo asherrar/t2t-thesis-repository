@@ -6,8 +6,8 @@
 #SBATCH --output=/home/asherrar/logs/%x-%a.o
 #SBATCH --error=/home/asherrar/logs/%x-%a.e
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=16
-#SBATCH --mem=48G
+#SBATCH --cpus-per-task=24
+#SBATCH --mem=64G
 #SBATCH --array=2-4
 #SBATCH --mail-type=BEGIN,END,FAIL
 #SBATCH --mail-user=andrew.sherrard@bcchr.ca
@@ -20,7 +20,7 @@ cd /scratch/asherrar/thesis_files/bam
 for list in $sample*
 do
 	cd pacbio
-	samtools merge -b /scratch/asherrar/thesis_files/bam/$list -o - | samtools sort -m32G - -o /scratch/asherrar/thesis_files/bam/pacbio/$list-merged.bam
-	samtools index /scratch/asherrar/thesis_files/bam/pacbio/$list-merged.bam
+	samtools merge -b /scratch/asherrar/thesis_files/bam/$list -o - | samtools sort -m56G - -o /scratch/asherrar/thesis_files/bam/pacbio/merged/$list-merged.bam
+	samtools index /scratch/asherrar/thesis_files/bam/pacbio/merged/$list-merged.bam
 	cd ..
 done
