@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #SBATCH --account=def-frid
-#SBATCH --time=12:00:00
+#SBATCH --time=24:00:00
 #SBATCH --job-name=bamstats
 #SBATCH --output=/home/asherrar/logs/%x-%a.o
 #SBATCH --error=/home/asherrar/logs/%x-%a.e

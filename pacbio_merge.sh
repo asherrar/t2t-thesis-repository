@@ -15,6 +15,7 @@
 module load samtools/1.15.1
 
 sample=HG00$SLURM_ARRAY_TASK_ID
+mkdir /scratch/asherrar/thesis_files/bam/pacbio/merged
 cd /scratch/asherrar/thesis_files/bam
 
 for list in $sample*
