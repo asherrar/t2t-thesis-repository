@@ -21,7 +21,7 @@ cd /scratch/asherrar/thesis_files/bam
 for list in $sample*
 do
 	cd pacbio
-	samtools merge -b /scratch/asherrar/thesis_files/bam/$list -o - | samtools sort -m56G - -o /scratch/asherrar/thesis_files/bam/pacbio/merged/$list-merged.bam
+	samtools merge -@ 15 -b /scratch/asherrar/thesis_files/bam/$list -o - | samtools sort -@ 7 -m8G - -o /scratch/asherrar/thesis_files/bam/pacbio/merged/$list-merged.bam
 	samtools index /scratch/asherrar/thesis_files/bam/pacbio/merged/$list-merged.bam
 	cd ..
 done

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #SBATCH --account=def-frid
-#SBATCH --time=48:00:00
+#SBATCH --time=24:00:00
 #SBATCH --job-name=gcbias_illumina
 #SBATCH --output=/home/asherrar/logs/%x-%a.o
 #SBATCH --error=/home/asherrar/logs/%x-%a.e
@@ -22,12 +22,12 @@ computeGCBias -b $sample-illumina-chm13v2.0-sorted.bam --effectiveGenomeSize 311
 	-o $destination/$sample-illumina-chm13v2.0-gcbias.txt \
 	--biasPlot $destination/$sample-illumina-chm13v2.0-gcbias.png
 
-computeGCBias -b $sample-illumina-hg38-sorted.bam --effectiveGenomeSize 3209286105 -p 16 \
+computeGCBias -b $sample-illumina-hg38-sorted.bam --effectiveGenomeSize 2913022398 -p 16 \
 	-g /scratch/asherrar/thesis_files/references/hg38.2bit \
 	-o $destination/$sample-illumina-hg38-gcbias.txt \
 	--biasPlot $destination/$sample-illumina-hg38-gcbias.png
 	
-computeGCBias -b $sample-illumina-hg19_chromosomes-sorted.bam --effectiveGenomeSize 3101804739 -p 16 \
-	-g /scratch/asherrar/thesis_files/references/hg19_chromosomes.2bit \
-	-o $destination/$sample-illumina-hg19_chromosomes-gcbias.txt \
-	--biasPlot $destination/$sample-illumina-hg19_chromosomes-gcbias.png
+computeGCBias -b $sample-illumina-hg19-sorted.bam --effectiveGenomeSize 2864785220 -p 16 \
+	-g /scratch/asherrar/thesis_files/references/hg19.2bit \
+	-o $destination/$sample-illumina-hg19-gcbias.txt \
+	--biasPlot $destination/$sample-illumina-hg19-gcbias.png
