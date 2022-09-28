@@ -17,17 +17,17 @@ cd /scratch/asherrar/thesis_files/bam/pacbio/merged
 
 destination=/scratch/asherrar/thesis_files/deeptools/gcbias
 	
-computeGCBias -b $sample-pacbio-chm13v2.0-merged.bam --effectiveGenomeSize 3117275501 -p 16 \
+computeGCBias -b $sample-pacbio-chm13v2.0-merged.bam --effectiveGenomeSize 3117275501 -l 11000 -p 16 \
 	-g /scratch/asherrar/thesis_files/references/chm13v2.0.2bit \
 	-o $destination/$sample-pacbio-chm13v2.0-gcbias.txt \
 	--biasPlot $destination/$sample-pacbio-chm13v2.0-gcbias.png
 
-computeGCBias -b $sample-pacbio-hg38-merged.bam --effectiveGenomeSize 2913022398 -p 16 \
+computeGCBias -b $sample-pacbio-hg38-merged.bam --effectiveGenomeSize 2913022398 -l 11000 -p 16 \
 	-g /scratch/asherrar/thesis_files/references/hg38.2bit \
 	-o $destination/$sample-pacbio-hg38-gcbias.txt \
 	--biasPlot $destination/$sample-pacbio-hg38-gcbias.png
 	
-computeGCBias -b $sample-pacbio-hg19-merged.bam --effectiveGenomeSize 2864785220 -p 16 \
+computeGCBias -b $sample-pacbio-hg19-merged.bam --effectiveGenomeSize 2864785220 -l 11000 -p 16 \
 	-g /scratch/asherrar/thesis_files/references/hg19.2bit \
 	-o $destination/$sample-pacbio-hg19-gcbias.txt \
 	--biasPlot $destination/$sample-pacbio-hg19-gcbias.png
